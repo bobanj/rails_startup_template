@@ -15,7 +15,7 @@ gem "cancan"
 gem "haml-rails" if yes?("Use HAML instead of ERB?")
 
 # Simple form builder (https://github.com/plataformatec/simple_form)
-gem "simple_form", git: "https://github.com/plataformatec/simple_form"
+gem "simple_form"#, git:"https://github.com/plataformatec/simple_form"
 # To generate UUIDs, useful for various things
 gem "uuidtools"
 
@@ -45,7 +45,7 @@ end
 # https://github.com/ddollar/foreman
 # ==================================================
 # Use Procfile for foreman
-run "echo 'web: bundle exec rails server -p $PORT' >> Procfile"
+run "echo 'web: rails server -p $PORT' >> Procfile"
 run "echo PORT=3000 >> .env"
 run "echo '.env' >> .gitignore"
 # We need this with foreman to see log output immediately
@@ -55,7 +55,7 @@ run "echo 'STDOUT.sync = true' >> config/environments/development.rb"
 
 # Initialize guard
 # ==================================================
-run "bundle exec guard init rspec"
+run "guard init rspec"
 
 
 
@@ -84,10 +84,10 @@ run "echo '@import \"bourbon\";' >>  app/assets/stylesheets/application.css.scss
 # Note: This is 3.0.0
 # ==================================================
 if yes?("Download bootstrap?")
-  run "wget https://github.com/twbs/bootstrap/archive/v3.0.0.zip -O bootstrap.zip -O bootstrap.zip"
+  run "wget https://github.com/twbs/bootstrap/archive/v3.0.1.zip -O bootstrap.zip"
   run "unzip bootstrap.zip -d bootstrap && rm bootstrap.zip"
-  run "cp bootstrap/bootstrap-3.0.0/dist/css/bootstrap.css vendor/assets/stylesheets/"
-  run "cp bootstrap/bootstrap-3.0.0/dist/js/bootstrap.js vendor/assets/javascripts/"
+  run "cp bootstrap/bootstrap-3.0.1/dist/css/bootstrap.css vendor/assets/stylesheets/"
+  run "cp bootstrap/bootstrap-3.0.1/dist/js/bootstrap.js vendor/assets/javascripts/"
   run "rm -rf bootstrap"
   run "echo '@import \"bootstrap\";' >>  app/assets/stylesheets/application.css.scss"
   run "rails g simple_form:install --bootstrap"
@@ -97,7 +97,7 @@ end
 # Font-awesome: Install from http://fortawesome.github.io/Font-Awesome/
 # ==================================================
 if yes?("Download font-awesome?")
-  run "wget http://fortawesome.github.io/Font-Awesome/assets/font-awesome.zip -O font-awesome.zip"
+  run "wget http://fontawesome.io/assets/font-awesome-4.0.1.zip -O font-awesome.zip"
   run "unzip font-awesome.zip && rm font-awesome.zip"
   run "cp font-awesome/css/font-awesome.css vendor/assets/stylesheets/"
   run "cp -r font-awesome/font public/font"
